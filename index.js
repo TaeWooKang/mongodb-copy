@@ -74,7 +74,7 @@ async function closeClient(client) {
 // data를 파일로 작성하는 함수
 
 function writeDocuments(count, rows) {
-    const isExist = fs.existsSync()
+    const isExist = fs.existsSync(copiedPath)
     if (isExist) {
         console.log(`${copiedPath} is already exists. please delete and restart.`)
         return false
