@@ -34,8 +34,10 @@ function getDb(client, dbName, cb = () => {}) {
     return new Promise ((resolve, reject) => {
         const db = client.db(dbName)
         if (db) resolve(db, cb ? cb(db) : null)
-        console.log(`can not found db name:${dbName}`)
-        reject(db)
+        else {
+            console.log(`can not found db name:${dbName}`)
+            reject(db)
+        }
     })
 }
 
@@ -58,8 +60,8 @@ async function getData(uri, dbName, collectionName ) {
     const client = await getClient(uri)
     const db = await getDb(client, dbName)
     const collection = await getCollection(db, collectionName)
-    const count = await collection.countDocuments({ classify: 'working.request'})
-    const rows = await collection.find({ classify: 'working.request'}).toArray()
+    const count = await collection.countDocuments()
+    const rows = await collection.find().toArray()
     await closeClient(client)
     return { count, rows }
 }
@@ -81,7 +83,7 @@ function writeDocuments(count, rows) {
     }
     console.log(`file path: ${copiedPath}`)
     const dataToJson = JSON.stringify({count, rows})
-    fs.writeFile(filePath, dataToJson, (error) => {
+    fs.writeFile(copiedPath, dataToJson, (error) => {
         if (error) {
             console.log(error)
         }
