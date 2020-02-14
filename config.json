@@ -1,0 +1,13 @@
+{
+    "mongo": {
+        "username" : "",
+        "password" : "",
+        "host" : "localhost",
+        "port" : 27017,
+        "dbName" : "",
+        "collectionName" : ""
+    },
+    "fs": {
+        "fileName": "./copied.json"
+    }
+}
